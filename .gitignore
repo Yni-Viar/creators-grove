@@ -6,6 +6,8 @@
 .import/
 export.cfg
 export_credentials.cfg
+*.tmp
+*.depren
 
 # Imported translations (automatically generated from CSV files)
 *.translation
@@ -14,3 +16,10 @@ export_credentials.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# Internal resources
+builds/
+android/
+CHANGELOG-RELEASE-GH.md
+*.mo
+src-4.7/

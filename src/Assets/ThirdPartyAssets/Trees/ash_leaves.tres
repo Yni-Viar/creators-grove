@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bi5o1pk3kv272"]
+
+[ext_resource type="Texture2D" uid="uid://6evqpvm2o4f5" path="res://Assets/ThirdPartyAssets/Trees/ash_leaves.png" id="1_e4nen"]
+[ext_resource type="Shader" uid="uid://ofydw4c5b5oa" path="res://Shaders/FoliageShader/foliage.gdshader" id="1_gdmv3"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_gdmv3")
+shader_parameter/texture_albedo = ExtResource("1_e4nen")
+shader_parameter/transmission = Color(0, 0, 0, 1)
+shader_parameter/sway_speed = 1.0
+shader_parameter/sway_strength = 0.05
+shader_parameter/sway_phase_len = 8.0

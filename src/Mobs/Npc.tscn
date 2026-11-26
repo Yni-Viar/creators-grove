@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dsjhc6hbfbanm"]
+
+[ext_resource type="Script" uid="uid://cr6sx4itfu1py" path="res://Mobs/MovableNpc.gd" id="1_xf5iw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xanw1"]
+radius = 0.4
+height = 2.6
+
+[node name="default" type="CharacterBody3D" unique_id=1139549438]
+script = ExtResource("1_xf5iw")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1787448852]
+path_desired_distance = 0.1
+avoidance_enabled = true
+max_speed = 15.0
+
+[node name="PlayerModel" type="Node3D" parent="." unique_id=1610931253]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=239643478]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.30404, 0)
+shape = SubResource("CapsuleShape3D_xanw1")
+
+[node name="Optimizator" type="VisibleOnScreenNotifier3D" parent="." unique_id=1963712599]
+
+[node name="WalkSounds" type="AudioStreamPlayer3D" parent="." unique_id=2086278961]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1150462, 0)
+max_distance = 128.0
+
+[connection signal="screen_entered" from="Optimizator" to="." method="_on_optimizator_screen_entered"]
+[connection signal="screen_exited" from="Optimizator" to="." method="_on_optimizator_screen_exited"]

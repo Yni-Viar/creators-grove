@@ -1,0 +1,167 @@
+name: "godot-ci export"
+on: 
+  push: 
+    tags:
+      "v*"
+
+# NOTE: If your `project.godot` is at the repository root, set `PROJECT_PATH` below to ".".
+
+# Parts used from Git-Xet project and is licensed under Apache License 2.0
+
+env:
+  GODOT_VERSION: 4.7.1
+  EXPORT_NAME: Grove
+  PROJECT_PATH: src
+
+jobs:
+  export-windows-x86-64:
+    name: Windows x86-64 Export
+    runs-on: ubuntu-24.04  # Use 24.04 with godot 4
+    timeout-minutes: 20
+    container:
+      image: barichello/godot-ci:4.7.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mkdir -v -p ~/.config/
+          mv /root/.config/godot ~/.config/godot
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Windows Build
+        run: |
+          mkdir -v -p build/windows-x86-64
+          EXPORT_DIR="$(readlink -f build)"
+          cd $PROJECT_PATH
+          godot --headless --verbose --export-release "Windows Desktop x86-64" "$EXPORT_DIR/windows-x86-64/$EXPORT_NAME.exe"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Grove_Windows_x86-64
+          path: build/windows-x86-64
+  
+  export-windows-arm64:
+    name: Windows arm64 Export
+    runs-on: ubuntu-24.04  # Use 24.04 with godot 4
+    timeout-minutes: 20
+    container:
+      image: barichello/godot-ci:4.7.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mkdir -v -p ~/.config/
+          mv /root/.config/godot ~/.config/godot
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Windows Build
+        run: |
+          mkdir -v -p build/windows-arm64
+          EXPORT_DIR="$(readlink -f build)"
+          cd $PROJECT_PATH
+          godot --headless --verbose --export-release "Windows Desktop arm64" "$EXPORT_DIR/windows-arm64/$EXPORT_NAME.exe"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Grove_Windows_arm64
+          path: build/windows-arm64
+
+  export-linux-x86-64:
+    name: Linux x86-64 Export
+    runs-on: ubuntu-24.04  # Use 24.04 with godot 4
+    timeout-minutes: 20
+    container:
+      image: barichello/godot-ci:4.7.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Linux Build
+        run: |
+          mkdir -v -p build/linux-x86-64
+          EXPORT_DIR="$(readlink -f build)"
+          cd $PROJECT_PATH
+          godot --headless --verbose --export-release "Linux x86-64" "$EXPORT_DIR/linux-x86-64/$EXPORT_NAME.x86_64"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Grove_Linux_x86-64
+          path: build/linux-x86-64
+
+  export-linux-arm64:
+    name: Linux arm64 Export
+    runs-on: ubuntu-24.04  # Use 24.04 with godot 4
+    timeout-minutes: 20
+    container:
+      image: barichello/godot-ci:4.7.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Linux Build
+        run: |
+          mkdir -v -p build/linux-arm64
+          EXPORT_DIR="$(readlink -f build)"
+          cd $PROJECT_PATH
+          godot --headless --verbose --export-release "Linux arm64" "$EXPORT_DIR/linux-arm64/$EXPORT_NAME.x86_64"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Grove_Linux_arm64
+          path: build/linux-arm64
+
+  export-web:
+    name: Web Export
+    runs-on: ubuntu-24.04  # Use 24.04 with godot 4
+    timeout-minutes: 20
+    container:
+      image: barichello/godot-ci:4.7.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Web Build
+        run: |
+          mkdir -v -p build/web
+          EXPORT_DIR="$(readlink -f build)"
+          cd $PROJECT_PATH
+          godot --headless --verbose --export-release "Web" "$EXPORT_DIR/web/index.html"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Grove_Web
+          path: build/web
+      - name: Install rsync 📚
+        run: |
+          apt-get update && apt-get install -y rsync
+
+  github-release:
+    name: Create GitHub release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs: [export-linux-x86-64, export-linux-arm64, export-windows-x86-64, export-windows-arm64, export-web]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333  # v8.0.2
+        with:
+          path: build
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          ls -l build
+          for dir in build/*; do (cd "$dir" && zip -r "../$(basename "$dir").zip" .); done
+          gh release create "${TAG}" build/*.zip --generate-notes --target "$GITHUB_SHA"

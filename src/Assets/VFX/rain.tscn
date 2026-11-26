@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://boaarofvi0isq"]
+
+[ext_resource type="Material" uid="uid://drmghtc6gtff8" path="res://Assets/VFX/WaterfallMaterial.tres" id="1_kwfd8"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_fnodd"]
+material = ExtResource("1_kwfd8")
+size = Vector2(0.06, 4)
+
+[node name="Rain" type="CPUParticles3D" unique_id=1014249296]
+visibility_range_end = 512.0
+amount = 1024
+lifetime = 2.0
+speed_scale = 2.0
+fixed_fps = 30
+visibility_aabb = AABB(-4, -4, -4, 8, 8, 8)
+mesh = SubResource("QuadMesh_fnodd")
+emission_shape = 3
+emission_box_extents = Vector3(256, 128, 256)
+linear_accel_min = 2.0399978
+linear_accel_max = 75.0

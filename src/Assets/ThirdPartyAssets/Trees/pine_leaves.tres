@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bwwwg7ccdp160"]
+
+[ext_resource type="Texture2D" uid="uid://cv03grdh02bak" path="res://Assets/ThirdPartyAssets/Trees/pine_leaves.png" id="1_dq2yr"]
+[ext_resource type="Shader" uid="uid://ofydw4c5b5oa" path="res://Shaders/FoliageShader/foliage.gdshader" id="1_o6gqh"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_o6gqh")
+shader_parameter/texture_albedo = ExtResource("1_dq2yr")
+shader_parameter/transmission = Color(0, 0, 0, 1)
+shader_parameter/sway_speed = 1.0
+shader_parameter/sway_strength = 0.05
+shader_parameter/sway_phase_len = 8.0

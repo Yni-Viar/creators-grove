@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="GameRegistry" format=3 uid="uid://qtuh67ot6jby"]
+
+[ext_resource type="Script" uid="uid://b3i78124uxbek" path="res://Scripts/MobResource.gd" id="1_8m1c1"]
+[ext_resource type="Script" uid="uid://cnj811g4qwcss" path="res://Scripts/Registry.gd" id="2_54r4h"]
+[ext_resource type="Resource" uid="uid://vx3vh2dg5r5j" path="res://Mobs/MobResources/Stag.tres" id="2_b1os5"]
+[ext_resource type="Resource" uid="uid://gmfsscidhfat" path="res://Mobs/MobResources/Doe.tres" id="3_vmicw"]
+[ext_resource type="PackedScene" uid="uid://c3g7svy8ec48c" path="res://Assets/OriginalAssets/01.tscn" id="4_uugfd"]
+[ext_resource type="PackedScene" uid="uid://dcg50k1r2lajo" path="res://Assets/OriginalAssets/C.tscn" id="5_iap3v"]
+[ext_resource type="PackedScene" uid="uid://cjmvqohuuhvtc" path="res://Assets/OriginalAssets/chair.tscn" id="6_jdm60"]
+[ext_resource type="PackedScene" uid="uid://dqrhg8liw80ig" path="res://Assets/OriginalAssets/D.tscn" id="7_i05tr"]
+[ext_resource type="PackedScene" uid="uid://cbgh1wdoh7cuq" path="res://Assets/OriginalAssets/L.tscn" id="8_jkp0s"]
+[ext_resource type="PackedScene" uid="uid://udcqkgkhcvvm" path="res://Assets/OriginalAssets/R.tscn" id="9_dadxa"]
+[ext_resource type="PackedScene" uid="uid://2mdlb3dft307" path="res://Assets/OriginalAssets/T.tscn" id="10_kx7v6"]
+[ext_resource type="ArrayMesh" uid="uid://deta354w3u123" path="res://Assets/OriginalAssets/Trees/SingleMesh/ash1.mesh" id="11_xmmsp"]
+[ext_resource type="ArrayMesh" uid="uid://cd75fnhuotodl" path="res://Assets/OriginalAssets/Trees/SingleMesh/ash2.mesh" id="12_vmicw"]
+[ext_resource type="ArrayMesh" uid="uid://dui4niurc3ncc" path="res://Assets/OriginalAssets/Trees/SingleMesh/ash3.mesh" id="13_aprid"]
+[ext_resource type="ArrayMesh" uid="uid://fh4ujsxblgl" path="res://Assets/OriginalAssets/Trees/SingleMesh/ash4.mesh" id="14_8ripc"]
+[ext_resource type="ArrayMesh" uid="uid://c4i1l3r3adyrg" path="res://Assets/OriginalAssets/Trees/SingleMesh/ash5.mesh" id="15_iih77"]
+[ext_resource type="ArrayMesh" uid="uid://bamxj1j0cr7ra" path="res://Assets/OriginalAssets/Trees/SingleMesh/oak1.mesh" id="16_eeiuh"]
+[ext_resource type="ArrayMesh" uid="uid://b82u8551s3x1b" path="res://Assets/OriginalAssets/Trees/SingleMesh/oak2.mesh" id="17_ei16j"]
+[ext_resource type="ArrayMesh" uid="uid://yg1b8s8byy7n" path="res://Assets/OriginalAssets/Trees/SingleMesh/oak3.mesh" id="18_irqn6"]
+[ext_resource type="ArrayMesh" uid="uid://d1m2spnw15uvk" path="res://Assets/OriginalAssets/Trees/SingleMesh/oak4.mesh" id="19_e8wrs"]
+[ext_resource type="ArrayMesh" uid="uid://b5ivtukucwnq8" path="res://Assets/OriginalAssets/Trees/SingleMesh/oak5.mesh" id="20_e586r"]
+[ext_resource type="ArrayMesh" uid="uid://dqg6x68evhsiy" path="res://Assets/OriginalAssets/Trees/SingleMesh/pine1.mesh" id="21_16n40"]
+[ext_resource type="ArrayMesh" uid="uid://b1er314wl6h35" path="res://Assets/OriginalAssets/Trees/SingleMesh/pine2.mesh" id="22_n1v5e"]
+
+[resource]
+script = ExtResource("2_54r4h")
+mobs = Array[ExtResource("1_8m1c1")]([ExtResource("2_b1os5"), ExtResource("3_vmicw")])
+sculptures = Array[PackedScene]([ExtResource("4_uugfd"), ExtResource("5_iap3v"), ExtResource("6_jdm60"), ExtResource("8_jkp0s"), ExtResource("9_dadxa"), ExtResource("10_kx7v6")])
+trees = Array[ArrayMesh]([ExtResource("11_xmmsp"), ExtResource("12_vmicw"), ExtResource("13_aprid"), ExtResource("14_8ripc"), ExtResource("15_iih77"), ExtResource("16_eeiuh"), ExtResource("17_ei16j"), ExtResource("18_irqn6"), ExtResource("19_e8wrs"), ExtResource("20_e586r"), ExtResource("21_16n40"), ExtResource("22_n1v5e")])
+underwater_sculptures = Array[PackedScene]([ExtResource("7_i05tr")])
+metadata/_custom_type_script = "uid://cnj811g4qwcss"

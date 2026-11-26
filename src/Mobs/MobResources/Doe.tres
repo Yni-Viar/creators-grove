@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MobResource" format=3 uid="uid://gmfsscidhfat"]
+
+[ext_resource type="PackedScene" uid="uid://dkcq18hif61ej" path="res://Mobs/MobPrefabs/doe.tscn" id="1_bdowy"]
+[ext_resource type="Script" uid="uid://b3i78124uxbek" path="res://Scripts/MobResource.gd" id="2_xlo4p"]
+
+[resource]
+script = ExtResource("2_xlo4p")
+mob_prefab = ExtResource("1_bdowy")
+metadata/_custom_type_script = "uid://b3i78124uxbek"

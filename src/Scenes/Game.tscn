@@ -1,0 +1,148 @@
+[gd_scene format=3 uid="uid://b4wko43lk7l1q"]
+
+[ext_resource type="Script" uid="uid://dplfqjwnu1ob7" path="res://Scripts/GameCore.gd" id="1_fgofq"]
+[ext_resource type="PackedScene" uid="uid://by5c7g15ljuta" path="res://Mobs/StaticPlayer.tscn" id="1_gl6un"]
+[ext_resource type="Script" uid="uid://cwlqip1l78y63" path="res://MapGen/IslandGenerator.gd" id="1_iukft"]
+[ext_resource type="Resource" uid="uid://qtuh67ot6jby" path="res://Scripts/GameData.tres" id="3_j5yw3"]
+[ext_resource type="ArrayMesh" uid="uid://bpu4fh0rqlwb3" path="res://Assets/OriginalAssets/terrain.mesh" id="4_b2bpf"]
+[ext_resource type="ArrayMesh" uid="uid://c3no4uijqw35x" path="res://Assets/OriginalAssets/terrain_top.mesh" id="5_7lihs"]
+[ext_resource type="ArrayMesh" uid="uid://b1nnq8pthqopj" path="res://Assets/OriginalAssets/water_level.mesh" id="6_2irst"]
+[ext_resource type="PackedScene" uid="uid://boaarofvi0isq" path="res://Assets/VFX/rain.tscn" id="7_2irst"]
+[ext_resource type="Texture2D" uid="uid://d1ngfmk102pok" path="res://UI/Godot/Camera.svg" id="9_3so38"]
+[ext_resource type="Texture2D" uid="uid://5a88tmrcdq6l" path="res://UI/close_fa.svg" id="9_71axn"]
+[ext_resource type="Texture2D" uid="uid://c221mv3w71dlt" path="res://UI/close_fa_pressed.svg" id="10_dahhg"]
+[ext_resource type="Texture2D" uid="uid://dg1t582utkm5b" path="res://UI/Godot/Reload.svg" id="12_3cx6b"]
+[ext_resource type="Texture2D" uid="uid://di6t0l7rpmry4" path="res://UI/Godot/Sky.svg" id="13_3cx6b"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_xmmsp"]
+geometry_parsed_geometry_type = 1
+
+[node name="Game" type="Node3D" unique_id=2011554502]
+script = ExtResource("1_fgofq")
+
+[node name="StaticPlayer" parent="." unique_id=1498480158 instance=ExtResource("1_gl6un")]
+
+[node name="TerrainGenerator" type="Node3D" parent="." unique_id=1895657093]
+script = ExtResource("1_iukft")
+quality = 1
+registry = ExtResource("3_j5yw3")
+terrain_mesh = ExtResource("4_b2bpf")
+water_level_mesh = ExtResource("6_2irst")
+terrain_surface_mesh = ExtResource("5_7lihs")
+navigation_mesh_preset = SubResource("NavigationMesh_xmmsp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2124451203]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 6.0361013, 0)
+light_color = Color(0.972549, 0.972549, 0.91764706, 1)
+
+[node name="Rain" parent="." unique_id=857676002 instance=ExtResource("7_2irst")]
+visible = false
+
+[node name="UI" type="Control" parent="." unique_id=251073739]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI" unique_id=1570278641]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -80.0
+offset_right = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 64
+
+[node name="Close" type="TextureButton" parent="UI/HBoxContainer" unique_id=436441624]
+layout_mode = 2
+texture_normal = ExtResource("9_71axn")
+texture_pressed = ExtResource("10_dahhg")
+stretch_mode = 3
+
+[node name="CameraToggle" type="TextureButton" parent="UI/HBoxContainer" unique_id=2052335654]
+layout_mode = 2
+texture_normal = ExtResource("9_3so38")
+stretch_mode = 3
+
+[node name="Regenerate" type="TextureButton" parent="UI/HBoxContainer" unique_id=1072306581]
+layout_mode = 2
+texture_normal = ExtResource("12_3cx6b")
+stretch_mode = 3
+
+[node name="ToggleRain" type="TextureButton" parent="UI/HBoxContainer" unique_id=1962268712]
+layout_mode = 2
+texture_normal = ExtResource("13_3cx6b")
+stretch_mode = 3
+
+[node name="Panel" type="Panel" parent="UI" unique_id=1397181152]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -260.0
+offset_right = 320.0
+offset_bottom = 220.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Panel" unique_id=122105225]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "Creator's grove
+---
+Spectate the creation, the art! That's all!
+Press N to regenerate the world
+Press B to toggle camera
+Press V to start rain
+Press Right Mouse Button to rotate.
+---
+Made by Yni Viar
+Licensed under MIT License
+---
+Third-party components
+---
+Godot Engine
+By Godot Engine contributors
+Licensed under MIT License
+---
+Camera Gimbal
+By kidscancode
+Licensed under MIT License
+---
+Parts of an island generation
+By GDQuest
+Licensed under MIT License
+---
+Foliage shader
+By Godot Docs contributors
+Licensed under CC-BY 3.0
+---
+Elk and doe 3D models
+By WildMesh 3D
+(https://sketchfab.com/WildMesh_3D)
+Licensed under CC-BY-4.0
+Elk model was modified by Yni.
+---
+"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="UI/HBoxContainer/Close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="UI/HBoxContainer/CameraToggle" to="." method="_on_camera_toggle_pressed"]
+[connection signal="pressed" from="UI/HBoxContainer/Regenerate" to="." method="_on_regenerate_pressed"]
+[connection signal="pressed" from="UI/HBoxContainer/ToggleRain" to="." method="_on_toggle_rain_pressed"]
