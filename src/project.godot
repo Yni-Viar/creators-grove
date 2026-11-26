@@ -18,6 +18,8 @@ run/main_scene="uid://b4wko43lk7l1q"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="CreatorsGrove"
 config/features=PackedStringArray("4.7", "GL Compatibility")
+boot_splash/bg_color=Color(0.14117648, 0.14117648, 0.14117648, 0)
+boot_splash/show_image=false
 config/icon="uid://f7k1t7novp4"
 
 [display]
