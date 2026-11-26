@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c221mv3w71dlt" path="res://UI/close_fa_pressed.svg" id="10_dahhg"]
 [ext_resource type="Texture2D" uid="uid://dg1t582utkm5b" path="res://UI/Godot/Reload.svg" id="12_3cx6b"]
 [ext_resource type="Texture2D" uid="uid://di6t0l7rpmry4" path="res://UI/Godot/Sky.svg" id="13_3cx6b"]
+[ext_resource type="Texture2D" uid="uid://bqgl7ppqxasy2" path="res://UI/Godot/Info.svg" id="14_wxwew"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_xmmsp"]
 geometry_parsed_geometry_type = 1
@@ -60,12 +61,6 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 64
 
-[node name="Close" type="TextureButton" parent="UI/HBoxContainer" unique_id=436441624]
-layout_mode = 2
-texture_normal = ExtResource("9_71axn")
-texture_pressed = ExtResource("10_dahhg")
-stretch_mode = 3
-
 [node name="CameraToggle" type="TextureButton" parent="UI/HBoxContainer" unique_id=2052335654]
 layout_mode = 2
 texture_normal = ExtResource("9_3so38")
@@ -76,9 +71,20 @@ layout_mode = 2
 texture_normal = ExtResource("12_3cx6b")
 stretch_mode = 3
 
+[node name="Close" type="TextureButton" parent="UI/HBoxContainer" unique_id=436441624]
+layout_mode = 2
+texture_normal = ExtResource("9_71axn")
+texture_pressed = ExtResource("10_dahhg")
+stretch_mode = 3
+
 [node name="ToggleRain" type="TextureButton" parent="UI/HBoxContainer" unique_id=1962268712]
 layout_mode = 2
 texture_normal = ExtResource("13_3cx6b")
+stretch_mode = 3
+
+[node name="Info" type="TextureButton" parent="UI/HBoxContainer" unique_id=460801652]
+layout_mode = 2
+texture_normal = ExtResource("14_wxwew")
 stretch_mode = 3
 
 [node name="Panel" type="Panel" parent="UI" unique_id=1397181152]
@@ -142,7 +148,8 @@ Elk model was modified by Yni.
 "
 horizontal_alignment = 1
 
-[connection signal="pressed" from="UI/HBoxContainer/Close" to="." method="_on_close_pressed"]
 [connection signal="pressed" from="UI/HBoxContainer/CameraToggle" to="." method="_on_camera_toggle_pressed"]
 [connection signal="pressed" from="UI/HBoxContainer/Regenerate" to="." method="_on_regenerate_pressed"]
+[connection signal="pressed" from="UI/HBoxContainer/Close" to="." method="_on_close_pressed"]
 [connection signal="pressed" from="UI/HBoxContainer/ToggleRain" to="." method="_on_toggle_rain_pressed"]
+[connection signal="pressed" from="UI/HBoxContainer/Info" to="." method="_on_info_pressed"]

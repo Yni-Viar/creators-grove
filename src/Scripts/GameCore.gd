@@ -76,3 +76,7 @@ func _on_toggle_rain_pressed() -> void:
 		Input.action_press("rain")
 		await get_tree().process_frame
 		Input.action_release("rain")
+
+
+func _on_info_pressed() -> void:
+	$UI/Panel.visible = !$UI/Panel.visible
