@@ -142,6 +142,7 @@ func _physics_process(delta: float) -> void:
 				state = State.IDLE
 			if wandering:
 				idle = true
+			follow_target = ""
 		return
 	
 		

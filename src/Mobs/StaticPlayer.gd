@@ -52,6 +52,8 @@ func _physics_process(delta: float) -> void:
 			transition = NodePath()
 	if Input.is_action_just_pressed("toggle_mode"):
 		toggle_switcher()
+	if Input.is_action_just_pressed("look"):
+		interact("Point")
 	rotate_player_by_key(Vector2i(int(Input.is_action_just_pressed("camera_rotate_right")) - int(Input.is_action_just_pressed("camera_rotate_left")), 0))
 	#if !target_puppet_path.is_empty():
 		#if get_node_or_null(target_puppet_path) == null:
@@ -69,17 +71,17 @@ func _physics_process(delta: float) -> void:
 				#global_position = get_node(target_puppet_path).global_position + Vector3(0, 3, 0)
 
 ## Used from Godot Docs
-#func intersect() -> Dictionary:
-	#var space_state = get_world_3d().direct_space_state
-	#var mousepos = get_viewport().get_mouse_position()
-#
-	#var origin = $Head/SpringArm3D/Camera3D.project_ray_origin(mousepos)
-	#var end = origin + $Head/SpringArm3D/Camera3D.project_ray_normal(mousepos) * RAY_LENGTH
-	#var query = PhysicsRayQueryParameters3D.create(origin, end)
-	#query.collision_mask = 1
-	#query.hit_back_faces = false
-	#
-	#return space_state.intersect_ray(query)
+func intersect() -> Dictionary:
+	var space_state = get_world_3d().direct_space_state
+	var mousepos = get_viewport().get_mouse_position()
+
+	var origin = $Head/Camera3D.project_ray_origin(mousepos)
+	var end = origin + $Head/Camera3D.project_ray_normal(mousepos) * RAY_LENGTH
+	var query = PhysicsRayQueryParameters3D.create(origin, end)
+	query.collision_mask = 1
+	query.hit_back_faces = false
+	
+	return space_state.intersect_ray(query)
 #
 ### Used from Godot Docs
 #func intersect_shape(intersect_position: Vector3) -> Array[Dictionary]:
@@ -101,39 +103,14 @@ func _physics_process(delta: float) -> void:
 	#
 	#return result
 
-#func interact(value: String) -> void:
-	#if get_node_or_null(target_puppet_path) == null:
-		#get_tree().root.get_node("Game").finish_game("GAME OVER", "You are somehow dead. Did you ever eat?")
-	#elif !get_node(target_puppet_path).movement_freeze:
-		#match value:
-			#"Point":
-				#var result: Dictionary = intersect()
-				#if result.keys().size() > 0:
-					## ray cast for moving
-					#if get_node_or_null(target_puppet_path) == null:
-						#get_tree().root.get_node("Game").finish_game("GAME OVER", "You are somehow dead. Did you ever eat?")
-					#else:
-						## Shape cast for items
-						#var shape_result: Array[Dictionary] = intersect_shape(result["position"])
-						#
-						#for s_result in shape_result:
-							#if s_result.keys().size() > 0:
-								##if s_result["collider"] is Pickable && !s_result["collider"].picked &&\
-								 ##!s_result["collider"].freeze && s_result["collider"].global_position.distance_to(get_node(target_puppet_path).global_position) < 4.0:
-									##get_node(get_tree().root.get_node("Game/StaticPlayer").target_puppet_path + "/UI/Inventory/Inventory").add_item(s_result["collider"].item_id)
-									##s_result["collider"].picked = true
-									##s_result["collider"].queue_free()
-									###Use only one item
-									##break
-								#if s_result["collider"] is InteractableStatic && s_result["collider"].global_position.distance_to(get_node(target_puppet_path).global_position) < 2.0:
-									#s_result["collider"].interact(get_node(target_puppet_path))
-									##Use only one interactable
-									#break
-								##if s_result["collider"] is MovableNpc:
-									##if !s_result["collider"].is_player:
-										##s_result["collider"].follow_target = target_puppet_path
-						#
-						#get_node(target_puppet_path).set_target_position(result["position"])
+func interact(value: String) -> void:
+	match value:
+		"Point":
+			var result: Dictionary = intersect()
+			if result.keys().size() > 0:
+				# ray cast for moving
+				if get_tree().get_node_count_in_group("NPC") > 0:
+					get_tree().get_nodes_in_group("NPC")[randi_range(0, get_tree().get_node_count_in_group("NPC") - 1)].set_target_position(result["position"])
 
 func rotate_player(event: InputEvent):
 	# Yni: Necessary to fix annoying bug on Android, when if you rotate screen, player began to move.
