@@ -16,6 +16,12 @@ func _ready() -> void:
 		$UI/HBoxContainer/Close.hide()
 		$UI/HBoxContainer/Regenerate.hide()
 		$UI/HBoxContainer/ToggleRain.hide()
+	elif OS.get_name() == "Android" && InputMap.action_get_events("look").size() > 0:
+		InputMap.action_erase_event("look", InputMap.action_get_events("look")[0])
+		var event: InputEventMouseButton = InputEventMouseButton.new()
+		event.button_index = MOUSE_BUTTON_LEFT
+		InputMap.action_add_event("look", event)
+		
 	await get_tree().process_frame
 	$TerrainGenerator.generate(true)
 

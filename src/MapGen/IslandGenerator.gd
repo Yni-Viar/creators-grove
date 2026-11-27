@@ -39,7 +39,7 @@ var temp_terrain_mesh: ArrayMesh
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if OS.get_name() == "Web":
+	if OS.get_name() == "Web" || OS.get_name() == "Android":
 		quality = Quality.LOW
 #
 #

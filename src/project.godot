@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Creator's Grove"
 config/description="Create your personal grove!"
-config/version="1.0.2"
+config/version="1.0.3"
 config/tags=PackedStringArray("art_game", "cozy", "game", "singleplayer")
 run/main_scene="uid://b4wko43lk7l1q"
 config/use_custom_user_dir=true
