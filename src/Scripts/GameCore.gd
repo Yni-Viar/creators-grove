@@ -12,12 +12,13 @@ var mouse_offset: Vector2 = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if OS.get_name() == "Web":
-		$UI/HBoxContainer/Close.hide()
-		$UI/HBoxContainer/Regenerate.hide()
-		$UI/HBoxContainer/ToggleRain.hide()
-	elif OS.get_name() == "Android" && InputMap.action_get_events("look").size() > 0:
-		InputMap.action_erase_event("look", InputMap.action_get_events("look")[0])
+	if (OS.get_name() == "Android" || OS.get_name() == "Web") && InputMap.action_get_events("look").size() > 0:
+		if OS.get_name() == "Android":
+			InputMap.action_erase_event("look", InputMap.action_get_events("look")[0])
+		else:
+			$UI/HBoxContainer/Close.hide()
+			$UI/HBoxContainer/Regenerate.hide()
+			$UI/HBoxContainer/ToggleRain.hide()
 		var event: InputEventMouseButton = InputEventMouseButton.new()
 		event.button_index = MOUSE_BUTTON_LEFT
 		InputMap.action_add_event("look", event)

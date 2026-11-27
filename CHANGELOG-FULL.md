@@ -1,5 +1,9 @@
 # Creator's Grove changelog
 
+## v1.0.4 (2026.11.27)
+
+- Web platform can use left key too for moving camera and attracting deer!
+
 ## v1.0.3 (2026.11.27)
 
 - Port Creator's Grove to Android
